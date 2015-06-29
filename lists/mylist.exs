@@ -32,7 +32,21 @@ defmodule MyList do
   def max(list) do
     reduce(list, 0, &_max/2)
   end
-
   defp _max(a, b) when a > b, do: a
   defp _max(a, b) when a < b, do: b
+
+  def caesar(charlist, n) do
+    _caesar(charlist, n)
+  end
+  defp _caesar([], n) do
+    []
+  end
+  defp _caesar([ head | tail], n) do
+    [ _convert(head, n) | _caesar(tail, n) ]
+  end
+  defp _convert(codepoint, n) when codepoint in 97..122 do
+    min..max = 97..122
+    rem((codepoint + n) - min, max - min + 1) + min
+  end
+  defp _convert(codepoint, _n), do codepoint
 end

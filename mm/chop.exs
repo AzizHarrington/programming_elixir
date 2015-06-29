@@ -5,16 +5,16 @@ defmodule Chop do
     _guess(actual, next_guess, low..high)
   end
 
-  def _guess(actual, actual, _range) do
+  defp _guess(actual, actual, _range) do
     IO.puts "Its #{actual}!"
     actual
   end
 
-  def _guess(actual, current, low.._high) when current > actual do
+  defp _guess(actual, current, low.._high) when current > actual do
     guess(actual, low..current - 1)
   end
 
-  def _guess(actual, current, _low..high) when current < actual do
+  defp _guess(actual, current, _low..high) when current < actual do
     guess(actual, current + 1..high)
   end
 end

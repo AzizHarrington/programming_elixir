@@ -35,18 +35,30 @@ defmodule MyList do
   defp _max(a, b) when a > b, do: a
   defp _max(a, b) when a < b, do: b
 
-  def caesar(charlist, n) do
-    _caesar(charlist, n)
-  end
-  defp _caesar([], n) do
+  def caesar([], _n) do
     []
   end
-  defp _caesar([ head | tail], n) do
-    [ _convert(head, n) | _caesar(tail, n) ]
+
+  def caesar([ head | tail], n) do
+    [ _convert(head, n) | caesar(tail, n) ]
   end
+
   defp _convert(codepoint, n) when codepoint in 97..122 do
     min..max = 97..122
     rem((codepoint + n) - min, max - min + 1) + min
   end
-  defp _convert(codepoint, _n), do codepoint
+
+  defp _convert(codepoint, _n) do
+    codepoint
+  end
+
+  def span(from, to) do
+    _span([], to, from..to)
+  end
+  defp _span(list, count, from..to) when count in from..to do
+    _span([ count | list ], count - 1, from..to)
+  end
+  defp _span(list, _, _) do
+    list
+  end
 end

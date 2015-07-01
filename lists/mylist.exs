@@ -43,8 +43,8 @@ defmodule MyList do
     [ _convert(head, n) | caesar(tail, n) ]
   end
 
-  defp _convert(codepoint, n) when codepoint in 97..122 do
-    min..max = 97..122
+  defp _convert(codepoint, n) when codepoint in ?a..?z do
+    min..max = ?a..?z
     rem((codepoint + n) - min, max - min + 1) + min
   end
 

@@ -21,6 +21,7 @@ defmodule MyList do
   def reduce([], value, _) do
     value
   end
+
   def reduce([head | tail], value, func) do
     reduce(tail, func.(head, value), func)
   end
@@ -32,6 +33,7 @@ defmodule MyList do
   def max(list) do
     reduce(list, 0, &_max/2)
   end
+
   defp _max(a, b) when a > b, do: a
   defp _max(a, b) when a < b, do: b
 
@@ -55,10 +57,32 @@ defmodule MyList do
   def span(from, to) do
     _span([], to, from..to)
   end
+
   defp _span(list, count, from..to) when count in from..to do
     _span([ count | list ], count - 1, from..to)
   end
+
   defp _span(list, _, _) do
     list
+  end
+
+
+  @doc """
+    Takes a nested list structure and flattens it
+  """
+  def flatten([]) do
+    []
+  end
+
+  def flatten([ [ head | [] ] | tail ]) do
+    flatten([ head | tail ])
+  end
+
+  def flatten([ [ head | tail1 ] | tail2 ]) do
+    flatten([ head | [ tail1 | tail2 ] ])
+  end
+
+  def flatten( [ head | tail ] ) do
+    [ head | flatten(tail) ]
   end
 end

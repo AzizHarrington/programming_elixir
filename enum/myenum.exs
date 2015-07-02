@@ -1,7 +1,6 @@
 defmodule MyEnum do
   @mdoc """
     My implementations of some basic enumerable protocol functions.
-    Only tested on/work on lists at the moment.
   """
 
   @doc """

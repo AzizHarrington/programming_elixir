@@ -66,7 +66,6 @@ defmodule MyList do
     list
   end
 
-
   @doc """
     Takes a nested list structure and flattens it
   """

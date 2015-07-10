@@ -84,4 +84,19 @@ defmodule MyList do
   def flatten( [ head | tail ] ) do
     [ head | flatten(tail) ]
   end
+
+  @doc """
+    Returns primes numbers 2 to n
+  """
+  def primes(bound) do
+    sieve(Enum.to_list 2..bound)
+  end
+
+  def sieve([]) do
+    []
+  end
+
+  def sieve([ head | tail ]) do
+    [ head | sieve( for x <- tail, rem(x, head) > 0, do: x) ]
+  end
 end

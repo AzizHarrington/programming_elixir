@@ -86,10 +86,11 @@ defmodule MyList do
   end
 
   @doc """
-    Returns primes numbers 2 to n
+    Returns primes numbers 2 to n.
+    uses naive 'sieve' algorithm
   """
   def primes(bound) do
-    sieve(Enum.to_list 2..bound)
+    sieve(span(2, bound))
   end
 
   def sieve([]) do
@@ -97,6 +98,24 @@ defmodule MyList do
   end
 
   def sieve([ head | tail ]) do
-    [ head | sieve( for x <- tail, rem(x, head) > 0, do: x) ]
+    [ head | sieve( for x <- tail, rem(x, head) > 0, do: x ) ]
   end
 end
+
+tax_rates = [ NC: 0.075, TX: 0.08 ]
+
+orders = [
+  [ id: 123, ship_to: :NC, net_amount: 100.00 ],
+  [ id: 124, ship_to: :OK, net_amount:  35.50 ],
+  [ id: 125, ship_to: :TX, net_amount:  24.00 ],
+  [ id: 126, ship_to: :TX, net_amount:  44.80 ],
+  [ id: 127, ship_to: :NC, net_amount:  25.00 ],
+  [ id: 128, ship_to: :MA, net_amount:  10.00 ],
+  [ id: 129, ship_to: :CA, net_amount: 102.00 ],
+  [ id: 120, ship_to: :NC, net_amount:  50.00 ]
+]
+
+totals = for [ id, ship: state, net: net ] <- orders,
+         do: [ id, ship: state, net: net, total_amount: net * tax_rates[state]]
+
+IO.inspect totals

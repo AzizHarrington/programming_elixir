@@ -12,4 +12,16 @@ defmodule Exercises do
   def compare(a, b) do
     a |> Enum.all? &(&1 in b)
   end
+
+  def calculate(expression) do
+    #TODO
+  end
+
+  def center(strings) do
+    #TODO
+  end
+
+  def capitalize_sentences(string) do
+    #TODO 
+  end
 end

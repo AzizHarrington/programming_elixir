@@ -58,7 +58,7 @@ parsed = OptionParser.parse(System.argv)
 {[file: dir, token: token], _, _} = parsed
 to_process = File.ls! dir
 
-Enum.each 1..100, fn num_processes ->
+Enum.each 1..10, fn num_processes ->
   {time, result} = :timer.tc(Scheduler, :run,
                              [num_processes, Count, :run, [dir, token], to_process])
   if num_processes == 1 do
